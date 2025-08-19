@@ -1,0 +1,23 @@
+teleport:
+  nodename: "macbook"                  # 이 맥북의 이름
+  data_dir: "/Users/choijeongsik/teleport_local/data"  # 서버 상태와 키 저장 위치
+  log:
+    output: /Users/choijeongsik/Desktop/teleport_local/data/logs/teleport.log
+    severity: INFO
+    format:
+      output: json
+
+auth_service:
+  enabled: yes
+  listen_addr: 0.0.0.0:3025           # 인증 서버 포트
+  cluster_name: "my-cluster"          # 클러스터 이름
+#  audit_events_uri: file:///Users/choijeongsik/teleport_local/logs/audit # Enterprise만 지원
+
+proxy_service:
+  enabled: yes
+  listen_addr: 0.0.0.0:3023           # SSH 프록시 포트
+  web_listen_addr: 0.0.0.0:3080       # 웹 UI 포트
+
+ssh_service:
+  enabled: yes
+  listen_addr: 0.0.0.0:3022           # SSH 접속 포트
