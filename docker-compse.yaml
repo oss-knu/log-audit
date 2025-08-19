@@ -1,4 +1,5 @@
 services:
+  #opensearch-node
   opensearch-node1:
     image: opensearchproject/opensearch:3
     container_name: opensearch-node1
@@ -24,6 +25,8 @@ services:
       - 9600:9600  # required for Performance Analyzer
     networks:
       - opensearch-net
+
+  #opensearch-dashboards
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:3
     container_name: opensearch-dashboards
@@ -33,6 +36,24 @@ services:
       - '5601'
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]'
+    depends_on:
+      - opensearch-node1
+    networks:
+      - opensearch-net
+  
+  #logstash
+  logstash:
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    container_name: logstash
+    command: logstash -f /usr/share/logstash/pipeline/teleport-audit.conf # pipeline 설정 파일을 지정함.
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./logstash/config:/usr/share/logstash/config
+      - ./data/logs:/teleport-logs # teleport 로그를 도커에 mount.
+    ports:
+      - "5001:5000"
+    depends_on:
+      - opensearch-node1
     networks:
       - opensearch-net
 
