@@ -2,6 +2,8 @@
 
 Teleport에서 발생하는 **Audit Logs**를 Logstash를 통해 OpenSearch에 저장하고, OpenSearch Dashboard에서 확인 및 필터링하는 부분.
 
+</br></br>
+
 ## 🏗️ 아키텍처 개요
 
 ```
@@ -14,6 +16,7 @@ Teleport → Logstash → OpenSearch → OpenSearch Dashboard
 * **OpenSearch Dashboard**: 로그 시각화 및 필터링
 
 
+</br></br>
 
 ## ⚙️ Teleport 설정 (teleport.yaml)
 
@@ -45,6 +48,8 @@ audit_service:
   audit_events_uri:
     - file:/var/lib/teleport/logs/teleport.log
 ```
+
+</br></br>
 
 ## 📦 Logstash 설정 (Pipeline 역할)
 
@@ -78,6 +83,8 @@ output {
   }
 }
 ```
+
+</br></br>
 
 ## 🔎 OpenSearch Dashboard에서 로그 확인
 
