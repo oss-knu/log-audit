@@ -32,22 +32,10 @@ teleport:
     severity: INFO
     format:
       output: json # json으로 formatting함.
-
-auth_service:
-  enabled: true
-  cluster_name: root-cluster-test
-
-proxy_service:
-  enabled: true
-
-ssh_service:
-  enabled: true
-
-audit_service:
-  enabled: true
-  audit_events_uri:
-    - file:/var/lib/teleport/logs/teleport.log
+...
 ```
+(root-cluster)
+
 
 </br></br>
 
